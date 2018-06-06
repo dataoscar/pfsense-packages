@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE packagegui SYSTEM "../schema/packages.dtd">
+<?xml-stylesheet type="text/xsl" href="../xsl/package.xsl"?>
+<packagegui>
+    <copyright>
+        <![CDATA[
+/* $Id$ */
+/* ====================================================================================== */
+/*
+	sniproxy.xml
+*/
+/* ====================================================================================== */
+/* ====================================================================================== */
+	]]>
+    </copyright>
+    <title>Services: sniproxy</title>
+    <name>sniproxy</name>
+    <include_file>/usr/local/pkg/sniproxy.inc</include_file>
+    <aftersaveredirect>status_services.php</aftersaveredirect>
+    <menu>
+        <name>Sniproxy</name>
+        <section>Services</section>
+        <url>/pkg_edit.php?xml=sniproxy.xml</url>
+    </menu>
+    <service>
+        <name>sniproxy</name>
+        <rcfile>sniproxy.sh</rcfile>
+        <executable>sniproxy</executable>
+        <description>Sniproxy HTTP and TLS proxy.</description>
+    </service>
+    <fields>
+        <field>
+            <name>Service Options</name>
+            <type>listtopic</type>
+        </field>
+        <field>
+            <fielddescr>Enable</fielddescr>
+            <fieldname>enable</fieldname>
+            <description>Enable sniproxy.</description>
+            <type>checkbox</type>
+        </field>
+        <field>
+            <fielddescr>Source IP Address</fielddescr>
+            <fieldname>ip_address</fieldname>
+            <type>interfaces_selection</type>
+            <description>Select the VIP that Sniproxy will bind on. </description>
+            <hideinterfaceregex>(wan|loopback|lan)</hideinterfaceregex>
+            <showvirtualips/>
+        </field>
+        <field>
+            <fielddescr>Use WAN for outgoing connections?</fielddescr>
+            <fieldname>use_wan_as_source</fieldname>
+            <description>
+                Uses the WAN address for outgoing connections. Since traffic from the firewall cannot use policy routing, this allows
+                bypassing internal routes. Leave unchecked to use the default firewall routing.
+            </description>
+            <type>checkbox</type>
+        </field>
+        <field>
+            <fielddescr>Proxy Port</fielddescr>
+            <fieldname>http_port</fieldname>
+            <type>input</type>
+            <description>Enter non-used listening port.</description>
+            <default_value>8880</default_value>
+        </field>
+        <field>
+            <fielddescr>Proxy SSL Port</fielddescr>
+            <fieldname>https_port</fieldname>
+            <type>input</type>
+            <description>Enter non-used SSL listening port.</description>
+            <default_value>8443</default_value>
+        </field>
+        <field>
+            <fielddescr>DNS Resolver Address</fielddescr>
+            <fieldname>dns_address</fieldname>
+            <type>input</type>
+            <description>Enter ip address to use for resolving dns.</description>
+        </field>
+        <field>
+            <fielddescr>Log Bad Requests</fielddescr>
+            <fieldname>bad_requests</fieldname>
+            <description>Should bad requests be logged.</description>
+            <type>checkbox</type>
+        </field>
+        <field>
+            <fielddescr>Access Log Verbosity</fielddescr>
+            <fieldname>access_log</fieldname>
+            <description>Enter the verbosity of the error log.</description>
+            <type>select</type>
+            <options>
+                <option><name>Emergency</name><value>emergency</value></option>
+                <option><name>Alerts</name><value>alert</value></option>
+                <option><name>Critical</name><value>critical</value></option>
+                <option><name>Errors</name><value>error</value></option>
+                <option><name>Warnings</name><value>warning</value></option>
+                <option><name>Notices</name><value>notice</value></option>
+                <option><name>Info</name><value>info</value></option>
+                <option><name>Debug</name><value>debug</value></option>
+            </options>
+            <default_value>notice</default_value>
+        </field>
+        <field>
+            <fielddescr>Error Log Verbosity</fielddescr>
+            <fieldname>error_log</fieldname>
+            <description>Enter the verbosity of the error log.</description>
+            <type>select</type>
+            <options>
+                <option><name>Emergency</name><value>emergency</value></option>
+                <option><name>Alerts</name><value>alert</value></option>
+                <option><name>Critical</name><value>critical</value></option>
+                <option><name>Errors</name><value>error</value></option>
+                <option><name>Warnings</name><value>warning</value></option>
+                <option><name>Notices</name><value>notice</value></option>
+                <option><name>Info</name><value>info</value></option>
+                <option><name>Debug</name><value>debug</value></option>
+                <default_value>notice</default_value>
+            </options>
+        </field>
+        <field>
+            <fielddescr>HTTP Table</fielddescr>
+            <fieldname>table_mappings</fieldname>
+            <type>textarea</type>
+            <description>Enter your table mappings, one mapping per line.</description>
+            <encoding>base64</encoding>
+            <cols>40</cols>
+            <rows>10</rows>
+        </field>
+        <field>
+            <fielddescr>HTTPS Table</fielddescr>
+            <fieldname>table_mappings_https</fieldname>
+            <type>textarea</type>
+            <description>Enter your HTTPS table mappings, one mapping per line.</description>
+            <encoding>base64</encoding>
+            <cols>40</cols>
+            <rows>10</rows>
+        </field>
+    </fields>
+    <custom_php_install_command>
+    </custom_php_install_command>
+    <custom_php_resync_config_command>
+       sync_sniproxy_conf();
+    </custom_php_resync_config_command>
+    <custom_php_validation_command>
+       validate_sniproxy_conf();
+    </custom_php_validation_command>
+</packagegui>

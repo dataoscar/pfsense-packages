@@ -1,0 +1,48 @@
+<?php
+# creates sniproxy.conf
+
+	$tconf=<<<EOF
+
+user nobody
+group nogroup
+
+pidfile /var/run/sniproxy.pid
+
+error_log {
+    filename /var/log/sniproxy.log
+    priority {$error_log}
+}
+
+access_log {
+    filename /var/log/sniproxy.log
+    priority {$access_log}
+}
+
+listen {$ip_address}:{$http_port} {
+    proto http
+    bad_requests {$bad_requests}
+    table http_hosts
+    {$source}
+}
+
+listen {$ip_address}:{$https_port} {
+    proto tls
+    bad_requests {$bad_requests}
+    table https_hosts
+    {$source}
+}
+
+resolver {
+    nameserver {$dns_address}
+    mode ipv4_only
+}
+
+table http_hosts{
+{$http_table_mappings}
+}
+
+table https_hosts{
+{$https_table_mappings}
+}
+EOF;
+?>

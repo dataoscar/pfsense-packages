@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<pfsensepkgs>
+	<package>
+		<name>sniproxy</name>
+		<descr><![CDATA[Sniproxy.]]></descr>
+		<website>https://github.com/dlundquist/sniproxy</website>
+		<version>%%PKGVERSION%%</version>
+		<configurationfile>sniproxy.xml</configurationfile>
+		<pkginfolink>https://github.com/dlundquist/sniproxy</pkginfolink>
+		<logging>
+			<logfilename>sniproxy.log</logfilename>
+		</logging>
+	</package>
+</pfsensepkgs>

@@ -1,0 +1,8 @@
+/etc/inc/priv/sniproxy.priv.inc
+pkg/sniproxy.conf.template
+pkg/sniproxy.inc
+pkg/sniproxy.xml
+www/shortcuts/pkg_sniproxy.inc
+%%DATADIR%%/info.xml
+@dir /etc/inc/priv
+@dir /etc/inc
